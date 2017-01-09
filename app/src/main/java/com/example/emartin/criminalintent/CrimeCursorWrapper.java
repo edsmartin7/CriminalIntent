@@ -10,5 +10,5 @@ public class CrimeCursorWrapper extends CursorWrapper{
     public CrimeCursorWrapper(Cursor cursor){
         super(cursor);
     }
-    
+
 }
