@@ -15,11 +15,11 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.w3c.dom.Text;
-
 import java.util.List;
 
+
+//checked
 public class CrimeListFragment extends Fragment{
 
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
@@ -116,6 +116,7 @@ public class CrimeListFragment extends Fragment{
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         }else{
+            mAdapter.setCrimes(crimes);
             mAdapter.notifyDataSetChanged();
         }
 
@@ -181,6 +182,10 @@ public class CrimeListFragment extends Fragment{
         @Override
         public int getItemCount(){
             return mCrimes.size();
+        }
+
+        public void setCrimes(List<Crime> crimes){
+            mCrimes = crimes;
         }
     }
 

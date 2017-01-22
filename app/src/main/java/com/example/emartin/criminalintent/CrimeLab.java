@@ -51,11 +51,38 @@ public class CrimeLab {
     }
 
     public List<Crime> getCrimes() {
-        return new ArrayList<>();
+        List<Crime> crimes = new ArrayList<>();
+
+        CrimeCursorWrapper cursor = queryCrimes(null, null);
+
+        try {
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()){
+                crimes.add(cursor.getCrime());
+                cursor.moveToNext();
+            }
+        }finally{
+            cursor.close();
+        }
+
+        return crimes;
     }
 
     public Crime getCrime(UUID id){
-        return null;
+        CrimeCursorWrapper cursor = queryCrimes(
+                CrimeTable.Cols.UUID + " = ?",
+                new String[] { id.toString() }
+        );
+
+        try{
+            if(cursor.getCount() == 0){
+                return null;
+            }
+            cursor.moveToFirst();
+            return cursor.getCrime();
+        }finally {
+            cursor.close();
+        }
     }
 
     //update row in DB, protect against SQL injection
@@ -80,17 +107,18 @@ public class CrimeLab {
     }
 
     //Query for a crime
-    private Cursor queryCrimes(String whereClause, String[] whereArgs){
+    private CrimeCursorWrapper queryCrimes(String whereClause, String[] whereArgs){
         Cursor cursor = mDatabase.query(
                 CrimeTable.NAME,
                 null,
                 whereClause,
                 whereArgs,
                 null,
-                null, null
+                null,
+                null
         );
 
-        return cursor;
+        return new CrimeCursorWrapper(cursor);
     }
 
 
