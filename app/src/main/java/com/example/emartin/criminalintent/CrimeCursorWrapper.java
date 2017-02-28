@@ -9,6 +9,8 @@ import com.example.emartin.criminalintent.CrimeDbSchema.CrimeTable;
 import java.util.Date;
 import java.util.UUID;
 
+
+//checked //db folder
 //wrapper class to wrap a cursor from one place and add new methods on top of it
 public class CrimeCursorWrapper extends CursorWrapper{
 
@@ -21,11 +23,13 @@ public class CrimeCursorWrapper extends CursorWrapper{
         String title = getString(getColumnIndex(CrimeTable.Cols.TITLE));
         long date = getLong(getColumnIndex(CrimeTable.Cols.DATE));
         int isSolved = getInt(getColumnIndex(CrimeTable.Cols.SOLVED));
+        String suspect = getString(getColumnIndex(CrimeTable.Cols.SUSPECT));
 
         Crime crime = new Crime(UUID.fromString(uuidString));
         crime.setTitle(title);
         crime.setDate(new Date(date));
         crime.setSolved(isSolved != 0);
+        crime.setSuspect(suspect);
 
         return crime;
     }

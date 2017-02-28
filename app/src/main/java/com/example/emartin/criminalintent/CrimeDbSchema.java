@@ -1,11 +1,10 @@
 package com.example.emartin.criminalintent;
 
-//error p 258
-
+//error p 258 ?
 //https://developer.android.com/training/basics/data-storage/databases.html
 //https://developer.android.com/guide/topics/data/data-storage.html#db
 
-
+//checked //db folder
 public class CrimeDbSchema {
 
     public static final class CrimeTable {
@@ -16,6 +15,7 @@ public class CrimeDbSchema {
             public static final String TITLE = "title";
             public static final String DATE = "date";
             public static final String SOLVED = "solved";
+            public static final String SUSPECT = "suspect";
 
         }
     }
